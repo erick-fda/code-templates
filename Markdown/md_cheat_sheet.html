@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>md_cheat_sheet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<!--======================================================================================
+    Markdown Cheat Sheet
+=======================================================================================-->
+<h1 id="markdown-cheat-sheet">Markdown Cheat Sheet</h1>
+<p><em>Copyright 2019 Erick Fernandez de Arteaga. All rights reserved.</em></p>
+<ul>
+<li>
+<p><a href="https://github.com/erick-fda" title="Erick's GitHub Profile">Erick's GitHub Profile</a></p>
+</li>
+<li>
+<p><a href="https://www.linkedin.com/in/erick-fda" title="Erick's LinkedIn Profile">Erick's LinkedIn Profile</a></p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Table of Contents
+=======================================================================================-->
+<h2 id="table-of-contents">Table of Contents</h2>
+<br>
+<ol>
+<li><a href="#section_how_to_read">How to Read This Cheat Sheet</a></li>
+<li><a href="#section_escaping_special_characters">Escaping Special Characters</a></li>
+<li><a href="#section_headers">Headers</a></li>
+<li><a href="#section_horizontal_rules">Horizontal Rules</a></li>
+<li><a href="#section_inline_styles">Inline Styles</a></li>
+<li><a href="#section_line_breaks">Line Breaks</a></li>
+<li><a href="#section_blockquotes">Blockquotes</a></li>
+<li><a href="#section_preformatted_text">Preformatted Text</a></li>
+<li><a href="#section_lists">Lists</a></li>
+<li><a href="#section_tables">Tables</a></li>
+<li><a href="#section_links">Links</a></li>
+<li><a href="#section_images">Images</a></li>
+<li><a href="#section_videos">Videos</a></li>
+</ol>
+<br>
+<!--======================================================================================
+    How to Read This Cheat Sheet
+=======================================================================================-->
+<p><a id="section_how_to_read"></a></p>
+<h2 id="how-to-read-this-cheat-sheet">How to Read This Cheat Sheet</h2>
+<p>Each section of this cheat sheet begins with a description of a particular feature of Markdown, including examples of the feature in the text itself.</p>
+<p>After the description, the raw Markdown used to generate the description will be displayed in a preformatted textbox.</p>
+<p>Compare the output with the raw syntax used in the preformatted textboxes to observe Markdown parsing in action!</p>
+<!--For example, this HTML comment appears in this preformatted textbox, but not in the output below, as text inside comment tags is never rendered.-->
+<br/>
+<h3 id="a-note-on-html-syntax-in-markdown-documents">A Note on HTML Syntax in Markdown Documents</h3>
+<p>Since Markdown is just a more easily readable syntax used to generate HTML, this means that all valid HTML is also valid Markdown!</p>
+<p>This fact normally only comes into play in the form of <code>&lt;!-- --&gt;</code> comments (used to comment your Markdown code), <code>&lt;br&gt;</code> tags (used to create line breaks), <code>&lt;a&gt;</code> tags (used to create internal links), and <code>&lt;style&gt;</code> tags (used to include internal stylesheets). All of these uses are touched upon later in the cheat sheet, but only with regards to how these tags are typically used in Markdown documents. For more information on HTML and CSS usage, I recommend you look elsewhere.</p>
+<br>
+<pre class="hljs"><code><div>Each section of this cheat sheet begins with a box of preformatted Markdown text that one might enter into a Markdown-compatible text editor.
+
+After the preformatted text, the corresponding output is displayed.
+
+<span class="xml"><span class="hljs-comment">&lt;!--For example, this HTML comment appears in this preformatted textbox, but not in the output below, as text inside comment tags is never rendered.--&gt;</span></span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+<span class="hljs-section">### A Note on HTML Syntax in Markdown Documents</span>
+
+
+Since Markdown is just a more easily readable syntax used to generate HTML, this means that all valid HTML is also valid Markdown!
+
+This convenient fact normally only comes into play in the form of <span class="hljs-code">`&lt;!-- --&gt;`</span> comments (used to comment your Markdown code), <span class="hljs-code">`&lt;br&gt;`</span> tags (used to create line breaks), <span class="hljs-code">`&lt;a&gt;`</span> tags (used to create internal links), and <span class="hljs-code">`&lt;style&gt;`</span> tags (used to include internal stylesheets). All of these uses are touched upon later in the cheat sheet, but only with regards to how these tags are typically used in Markdown documents. For more information on HTML and CSS syntax, I recommend you look elsewhere.
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Escaping Special Characters
+=======================================================================================-->
+<p><a id="section_escaping_special_characters"/></a></p>
+<h2 id="escaping-special-characters">Escaping Special Characters</h2>
+<p>You can interpret Markdown's special characters literally by preceding them with a \ backslash character.</p>
+<p>This is useful if, for example, you need to discuss a construct such as &lt;br&gt; without actually inserting a line break.</p>
+<p>Keep in mind that because \ is itself a special character, you will need to type \\ to include a literal backslash in your text.</p>
+<p><code>Inline preformatted text</code>, discussed later in this cheat sheet, is also a useful way to display special characters such as <code>\</code> literally.</p>
+<br>
+<pre class="hljs"><code><div>You can interpret Markdown's special characters literally by preceding them with a \\ backslash character.
+
+This is useful if, for example, you need to discuss a construct such as "\<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>" without actually inserting a line break.
+
+Keep in mind that because \\ is itself a special character, you will need to type \\\\ to include a literal backslash in your text.
+
+<span class="hljs-code">`Inline preformatted text`</span>, discussed later in this cheat sheet, is also a useful way to display special characters such as <span class="hljs-code">`\`</span> literally.
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Headers
+=======================================================================================-->
+<p><a id="section_headers"></a></p>
+<h2 id="headers">Headers</h2>
+<p>Headers are useful for titling the sections and subsections of your document.</p>
+<p>To create a header, precede the header text by one to six <code>#</code> number sign characters, depending on what level of header you want to create.</p>
+<h1 id="h1">H1</h1>
+<h2 id="h2">H2</h2>
+<h3 id="h3">H3</h3>
+<h4 id="h4">H4</h4>
+<h5 id="h5">H5</h5>
+<h6 id="h6">H6</h6>
+<p>H1 and H2 headers can also be created by following them with a line containing any number of <code>=</code> equals or <code>-</code> hyphen characters, respectively.</p>
+<h1 id="h1-with-equal-signs">H1 With Equal Signs</h1>
+<h2 id="h2-with-hyphens">H2 With Hyphens</h2>
+<br>
+<pre class="hljs"><code><div>Headers are useful for titling the sections and subsections of your document.
+
+To create a header, precede the header text by one to six <span class="hljs-code">`#`</span> number sign characters, depending on what level of header you want to create.
+
+<span class="hljs-section"># H1</span>
+<span class="hljs-section">## H2</span>
+<span class="hljs-section">### H3</span>
+<span class="hljs-section">#### H4</span>
+<span class="hljs-section">##### H5</span>
+<span class="hljs-section">###### H6</span>
+
+H1 and H2 headers can also be created by following them with a line containing any number of <span class="hljs-code">`=`</span> equals or <span class="hljs-code">`-`</span> hyphen characters, respectively.
+
+H1 With Equal Signs
+=
+
+<span class="hljs-section">H2 With Hyphens
+---</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Horizontal Rules
+=======================================================================================-->
+<p><a id="section_horizontal_rules"/></a></p>
+<h2 id="horizontal-rules">Horizontal Rules</h2>
+<p>Horizontal rules are useful for creating underlines for your headers or, alternatively, sectioning off parts of your document without using a header.</p>
+<p>To create a horizontal rule, insert a line containing at least three <code>-</code> hyphen, <code>_</code> underscore, or <code>*</code> asterisk characters and nothing else.</p>
+<hr>
+<p>or</p>
+<hr>
+<p>or</p>
+<hr>
+<br>
+<pre class="hljs"><code><div>Horizontal rules are useful for creating underlines for your headers or, alternatively, sectioning off parts of your document without using a header.
+
+To create a horizontal rule, insert a line containing at least three <span class="hljs-code">`-`</span> hyphen, <span class="hljs-code">`_`</span> underscore, or <span class="hljs-code">`*`</span> asterisk characters and nothing else.
+
+
+---
+
+or
+
+<span class="hljs-emphasis">___</span>
+
+or
+
+<span class="hljs-emphasis">***</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Inline Styles
+=======================================================================================-->
+<p><a id="section_inline_styles"/></a></p>
+<h2 id="inline-styles">Inline Styles</h2>
+<p>To italicize text inline, insert <code>*</code> <em>asterisks</em> or <code>_</code> <em>underscores</em> around the text to format.</p>
+<p>To bold text inline, insert double <code>**</code> <strong>asterisks</strong> or <code>__</code> <strong>underscores</strong> around the text to format.</p>
+<p>You can <strong>mix <em>and</em></strong> <em>match</em> by <strong>combining <em>the</em></strong> <em>two</em>. Keep in mind that this syntax functions like parentheses or XML, and thus itlicized and bolded sections of text must  be properly <em>ne<strong>st</strong>ed</em>. Otherwise, you will get <strong>_we</strong>ird_ output.</p>
+<p>For the sake of consistency, a common convention is to use only <code>_</code> <em>underscores for italicized text</em> and only <code>**</code> <strong>asterisks for bold text</strong>.</p>
+<p>You can also create strikethrough text by inserting double <code>~~</code> <s>squiggles</s> tildes around the text to format.</p>
+<br>
+<pre class="hljs"><code><div>To italicize text inline, insert <span class="hljs-code">`*`</span> <span class="hljs-emphasis">*asterisks*</span> or <span class="hljs-code">`_`</span> <span class="hljs-emphasis">_underscores_</span> around the text to format.
+
+To bold text inline, insert double <span class="hljs-code">`**`</span> <span class="hljs-strong">**asterisks**</span> or <span class="hljs-code">`__`</span> <span class="hljs-strong">__underscores__</span> around the text to format.
+
+You can <span class="hljs-strong">**mix _and_*</span><span class="hljs-bullet">* _match_ by __combining *</span>the<span class="hljs-strong">*__ *two*. Keep in mind that this syntax functions like parentheses or XML, and thus itlicized and bolded sections of text must  be properly _ne**</span>st<span class="hljs-strong">**ed_. Otherwise, you will get **</span><span class="hljs-emphasis">_we**ird_</span> output.
+
+For the sake of consistency, a common convention is to use only <span class="hljs-code">`_`</span> <span class="hljs-emphasis">_underscores for italicized text_</span> and only <span class="hljs-code">`**`</span> <span class="hljs-strong">**asterisks for bold text**</span>.
+
+You can also create strikethrough text by inserting double <span class="hljs-code">`~~`</span> ~~squiggles~~ tildes around the text to format.
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Line Breaks
+=======================================================================================-->
+<p><a id="section_line_breaks"/></a></p>
+<h2 id="line-breaks">Line Breaks</h2>
+<p>Text on the same line appear as part of the same paragraph.</p>
+<p>Text separated by
+only one newline
+will appear as
+part of the same
+paragraph. The line
+breaks
+are converted to
+spaces.</p>
+<p>Text separated by two or more newlines will appear as separate paragraphs.</p>
+<p>Like this!</p>
+<p>You can insert line breaks without starting a new paragraph using HTML <code>&lt;br&gt;</code> tags.<br>It's handy!</p>
+<p><code>&lt;br&gt;</code> tags can also be used to insert multiple empty lines between paragraphs.</p>
+<p><br><br><br></p>
+<p>The empty lines above push this text so far away!</p>
+<br>
+<pre class="hljs"><code><div>Text on the same line appear as part of the same paragraph.
+
+Text separated by
+only one newline
+will appear as
+part of the same
+paragraph. The line
+breaks
+are converted to
+spaces.
+
+Text separated by two or more newlines will appear as separate paragraphs.
+
+Like this!
+
+You can insert line breaks without starting a new paragraph using HTML <span class="hljs-code">`&lt;br&gt;`</span> tags.<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>It's handy!
+
+<span class="hljs-code">`&lt;br&gt;`</span> tags can also be used to insert multiple empty lines between paragraphs.
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+The empty lines above push this text so far away!
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Blockquotes
+=======================================================================================-->
+<p><a id="section_blockquotes"/></a></p>
+<h2 id="blockquotes">Blockquotes</h2>
+<p>To create a blockquote, precede each line in the paragraph to format with one &quot;&gt;&quot; (greater than) and one space character.</p>
+<blockquote>
+<p>&quot;I give myself very good advice,
+but I very seldom follow it.&quot;<br>-- Alice (<em>Alice in Wonderland</em>)</p>
+</blockquote>
+<blockquote>
+<p>&quot;Note that blockquote lines separated by two or more newlines (or anything that isn't a blockquote) will appear as part of separate blockquotes.&quot;<br>-- Erick Fernandez de Arteaga (<em>Markdown Cheat Sheet</em>)</p>
+</blockquote>
+<br>
+<pre class="hljs"><code><div>To create a blockquote, precede each line in the paragraph to format with one "&gt;" (greater than) and one space character.
+
+<span class="hljs-quote">&gt; "I give myself very good advice,</span>
+<span class="hljs-quote">&gt; but I very seldom follow it."&lt;br&gt;-- Alice (_Alice in Wonderland_)</span>
+
+<span class="hljs-quote">&gt; "Note that blockquote lines separated by two or more newlines (or anything that isn't a blockquote) will appear as part of separate blockquotes."&lt;br&gt;-- Erick Fernandez de Arteaga (_Markdown Cheat Sheet_)</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Preformatted Text
+=======================================================================================-->
+<p><a id="section_preformatted_text"/></a></p>
+<h2 id="preformatted-text">Preformatted Text</h2>
+<p>To create preformatted text inline (like I do to highlight special characters throughout this cheat sheet), insert <code>backticks</code> around the text to format.</p>
+<pre class="hljs"><code><div>To create a preformatted text block (like I've been doing in every section of this cheat sheet to show the raw Markdown), type three backticks on the lines before and after the text to preformat.
+</div></code></pre>
+<p>To apply the syntax highlighting for a specific code language to a preformatted text block, type a space and the name of the language after the three backticks in the first line.</p>
+<p>Sometimes the filetype extension is used rather than the language name, such as in the case of &quot;<code>cs</code>&quot; for C#. You can google what to type for your desired language.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> myInt = <span class="hljs-number">5</span>;
+Debug.Log(<span class="hljs-string">"Some text."</span>);
+</div></code></pre>
+<br>
+<p><em>NOTE: Because the following code itself features the triple backticks that are used to make preformatted text blocks, I had to escape the backticks using <code>\</code> backslash characters to prevent the formatting from breaking.</em></p>
+<p><em>To actually generate the output text above, <code>\</code> backslash characters should not be used.</em></p>
+<pre class="hljs"><code><div>To create preformatted text inline (like I do to highlight special characters throughout this cheat sheet), insert <span class="hljs-code">`backticks`</span> around the text to format.
+
+\<span class="hljs-code">```
+To create a preformatted text block (like I've been doing in every section of this cheat sheet to show the raw Markdown), type three backticks on the lines before and after the text to preformat.
+\```
+
+To apply the syntax highlighting for a specific code language to a preformatted text block, type a space and the name of the language after the three backticks in the first line.
+
+Sometimes the filetype extension is used rather than the language name, such as in the case of "`cs`" for C#. You can google what to type for your desired language.
+
+\``` cs
+int myInt = 5;
+Debug.Log("Some text.");
+\```
+</span></div></code></pre>
+<br>
+<!--======================================================================================
+    Lists
+=======================================================================================-->
+<p><a id="section_lists"/></a></p>
+<h2 id="lists">Lists</h2>
+<h3 id="ordered-lists">Ordered Lists</h3>
+<ol>
+<li>
+<p>To create an ordered (i.e., numbered) list, begin a line with a number, a period, and a space character, followed by the list item text.</p>
+</li>
+<li>
+<p>Continue numbering consecutive lines to add more items to the list.</p>
+</li>
+<li>
+<p>The number used for the first list item determines what number the list's numbering starts at, but subsequent numbers don't matter. For example, all three list items so far have been numbered 1 in the raw Markdown but will appear as item 3 in the output.</p>
+<ol>
+<li>
+<p>You can create sub-items by preceding a list item with 3 space characters.</p>
+</li>
+<li>
+<p>Keep in mind that the first in a string of sub-items is considered the beginning of a new list, and so its number <em>does</em> matter. Note how the item above this one is numbered 7 in both the raw Markdown and the output.</p>
+<ol>
+<li>You can keep nesting list items with three-space indentations as far as you want.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>List items indented the same amount will be treated as belonging to the same list level. Their numbering will behave as expected. For example, this item is numbered 1 in the raw Markdown, but 4 in the output, since it continues from the previous numbering.</p>
+</li>
+</ol>
+<br>
+<h3 id="unordered-lists">Unordered Lists</h3>
+<ul>
+<li>To create an unordered (i.e., bulleted) list, use <code>-</code> hyphens...</li>
+</ul>
+<ul>
+<li>...<code>*</code> asterisks...</li>
+</ul>
+<ul>
+<li>
+<p>...or <code>+</code> plus signs. You can mix and match these three within a single unordered list without any trouble.</p>
+<ul>
+<li>
+<p>Sub-items are created the same way as with numbered lists: by preceding the item with three space characters.</p>
+</li>
+<li>
+<p>Instead of starting a new numbered list, as numbered sub-items do, unordered sub-items normally have bullets that look different from those of the first list level.</p>
+<ul>
+<li>As with numbered lists, unordered lists can be nested as much as you want.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Returning to the regular list indentation also works the same way as with numbered lists.</li>
+</ul>
+<br>
+<h3 id="mixing-list-types">Mixing List Types</h3>
+<ol>
+<li>You can create an ordered list...
+<ul>
+<li>...with unordered sub-items!</li>
+</ul>
+</li>
+</ol>
+<br>
+<ul>
+<li>Or an unordered list...
+<ol>
+<li>...with numbered sub-items!</li>
+</ol>
+</li>
+</ul>
+<br>
+<pre class="hljs"><code><div><span class="hljs-section">### Ordered Lists</span>
+
+
+<span class="hljs-bullet">1. </span>To create an ordered (i.e., numbered) list, begin a line with a number, a period, and a space character, followed by the list item text.
+
+<span class="hljs-bullet">1. </span>Continue numbering consecutive lines to add more items to the list.
+
+<span class="hljs-bullet">2. </span>The number used for the first list item determines what number the list's numbering starts at, but subsequent numbers don't matter. For example, all three list items so far have been numbered 1 in the raw Markdown but will appear as item 3 in the output.
+
+   1. You can create sub-items by preceding a list item with 3 space characters.
+
+   2. Keep in mind that the first in a string of sub-items is considered the beginning of a new list, and so its number <span class="hljs-emphasis">_does_</span> matter. Note how the item above this one is numbered 7 in both the raw Markdown and the output.
+
+<span class="hljs-code">      1. You can keep nesting list items with three-space indentations as far as you want.</span>
+
+<span class="hljs-bullet">1. </span>List items indented the same amount will be treated as belonging to the same list level. Their numbering will behave as expected. For example, this item is numbered 1 in the raw Markdown, but 4 in the output, since it continues from the previous numbering.
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+<span class="hljs-section">### Unordered Lists</span>
+
+
+<span class="hljs-bullet">- </span>To create an unordered (i.e., bulleted) list, use <span class="hljs-code">`-`</span> hyphens...
+
+<span class="hljs-bullet">* </span>...<span class="hljs-code">`*`</span> asterisks...
+
+<span class="hljs-bullet">+ </span>...or <span class="hljs-code">`+`</span> plus signs. You can mix and match these three within a single unordered list without any trouble.
+
+   - Sub-items are created the same way as with numbered lists: by preceding the item with three space characters.
+
+   - Instead of starting a new numbered list, as numbered sub-items do, unordered sub-items normally have bullets that look different from those of the first list level.
+
+<span class="hljs-code">      - As with numbered lists, unordered lists can be nested as much as you want.</span>
+
+<span class="hljs-bullet">* </span>Returning to the regular list indentation also works the same way as with numbered lists.
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+<span class="hljs-section">### Mixing List Types</span>
+
+
+<span class="hljs-bullet">1. </span>You can create an ordered list...
+   - ...with unordered sub-items!
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+<span class="hljs-bullet">- </span>Or an unordered list...
+   1. ...with numbered sub-items!
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Tables
+=======================================================================================-->
+<p><a id="section_tables"/></a></p>
+<h2 id="tables">Tables</h2>
+<p>To create a table, use <code>|</code> vertical bars to define columns and <code>-</code> hyphens to define the header row.</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>Nice</th>
+<th>Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Here's</td>
+<td>some</td>
+<td>data.</td>
+</tr>
+<tr>
+<td>And</td>
+<td>some</td>
+<td>more.</td>
+</tr>
+<tr>
+<td>And</td>
+<td>some</td>
+<td>more.</td>
+</tr>
+<tr>
+<td>And</td>
+<td>some</td>
+<td>more.</td>
+</tr>
+</tbody>
+</table>
+<p>You can use colon characters to left-, center-, or right-align the text within table columns as below.</p>
+<table>
+<thead>
+<tr>
+<th>Left</th>
+<th style="text-align:center">Center</th>
+<th style="text-align:right">Right</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>22</td>
+<td style="text-align:center">22</td>
+<td style="text-align:right">22</td>
+</tr>
+<tr>
+<td>333</td>
+<td style="text-align:center">333</td>
+<td style="text-align:right">333</td>
+</tr>
+<tr>
+<td>4444</td>
+<td style="text-align:center">4444</td>
+<td style="text-align:right">4444</td>
+</tr>
+</tbody>
+</table>
+<p>Your Markdown text doesn't need to be neatly aligned for the table to display properly. The outer vertical bars and padding spaces are optional, and you only need three hyphen characters per column to indicate the header row.</p>
+<table>
+<thead>
+<tr>
+<th>This</th>
+<th>Ugly</th>
+<th>Formatting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>can</td>
+<td>still</td>
+<td>become</td>
+</tr>
+<tr>
+<td>a</td>
+<td>beautiful</td>
+<td>table.</td>
+</tr>
+<tr>
+<td>Isn't</td>
+<td>it</td>
+<td>great</td>
+</tr>
+<tr>
+<td>how</td>
+<td>this</td>
+<td>works?</td>
+</tr>
+</tbody>
+</table>
+<br>
+<pre class="hljs"><code><div>To create a table, use <span class="hljs-code">`|`</span> vertical bars to define columns and <span class="hljs-code">`-`</span> hyphens to define the header row.
+
+| A      | Nice | Header |
+| ------ | ---- | ------ |
+| Here's | some | data.  |
+| And    | some | more.  |
+
+You can use colon characters to left-, center-, or right-align the text within table columns as below.
+
+| Left | Center | Right |
+| ---- |:------:| -----:|
+| 1    | 1      | 1     |
+| 22   | 22     | 22    |
+| 333  | 333    | 333   |
+
+Your Markdown text doesn't need to be neatly aligned for the table to display properly. The outer vertical bars and padding spaces are optional, and you only need three hyphen characters per column to indicate the header row.
+
+This|Ugly|Formatting
+---|---|---
+can|still|become
+a|beautiful|table.
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Links
+=======================================================================================-->
+<p><a id="section_links"/></a></p>
+<h2 id="links">Links</h2>
+<h3 id="external-links">External Links</h3>
+<p>In other words, links to a resource OUTSIDE your Markdown document, such as a webpage.</p>
+<p><a href="https://www.google.com">An inline link.</a></p>
+<p><a href="https://www.google.com" title="Hover over the link for a tooltip.">An inline link with a tooltip.</a></p>
+<p><a href="https://www.google.com">A reference link.</a></p>
+<p><a href="https://www.google.com" title="Hover over the reference link for a tooltip.">A reference link with a tooltip.</a></p>
+<p>A reference link using <a href="https://www.google.com" title="This type of link can have a tooltip, too.">the link text as the reference name.</a></p>
+<!-- The references used in the links above. These must be defined in order for your links to work, and will not be rendered by a parser. -->
+<br>
+<h3 id="internal-links-anchors">Internal Links (Anchors)</h3>
+<p>In other words, a link to a particular place WITHIN your Markdown document, such as a heading. Internal links are great for making tables of contents!</p>
+<p><a href="#anchor_id_to_jump_to" title="Just like with external links, you can define tooltip text for anchors.">This link goes to an anchor in the document with the given #name.</a></p>
+<p>The anchor link above will link you to the text below.</p>
+<p><a id="anchor_id_to_jump_to"></a>
+The anchor link above will link you here!</p>
+<br>
+<pre class="hljs"><code><div><span class="hljs-section">### External Links</span>
+
+
+In other words, links to a resource OUTSIDE your Markdown document, such as a webpage.
+
+[<span class="hljs-string">An inline link.</span>](<span class="hljs-link">https://www.google.com</span>)
+
+[<span class="hljs-string">An inline link with a tooltip.</span>](<span class="hljs-link">https://www.google.com "Hover over the link for a tooltip."</span>)
+
+[<span class="hljs-string">A reference link.</span>][<span class="hljs-symbol">Any text you want</span>]
+
+[<span class="hljs-string">A reference link with a tooltip.</span>][<span class="hljs-symbol">This reference defines both the link source and the tooltip text</span>]
+
+A reference link using [the link text as the reference name.]
+
+
+<span class="xml"><span class="hljs-comment">&lt;!-- The references used in the links above. These must be defined in order for your links to work, and will not be rendered by a parser. --&gt;</span></span>
+
+[<span class="hljs-symbol">Any text you want</span>]: <span class="hljs-link">https://www.google.com</span>
+
+[<span class="hljs-symbol">This reference defines both the link source and the tooltip text</span>]: <span class="hljs-link">https://www.google.com "Hover over the reference link for a tooltip."</span>
+
+[<span class="hljs-symbol">the link text as the reference name.</span>]: <span class="hljs-link">https://www.google.com "This type of link can have a tooltip, too."</span>
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span>
+
+<span class="hljs-section">### Internal Links (Anchors)</span>
+
+
+In other words, a link to a particular place WITHIN your Markdown document, such as a heading. Internal links are great for making tables of contents!
+
+[<span class="hljs-string">This link goes to an anchor in the document with the given #name.</span>](<span class="hljs-link">#anchor_id_to_jump_to "Just like with external links, you can define tooltip text for anchors."</span>)
+
+The anchor link above will link you to the text below.
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"anchor_id_to_jump_to"</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span>
+The anchor link above will link you here!
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Images
+=======================================================================================-->
+<p><a id="section_images"/></a></p>
+<h2 id="images">Images</h2>
+<p>To insert an image in your document, use the same syntax as for links, but precede it with an exclamation point.</p>
+<p>An inline image link:</p>
+<p><img src="https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Alternate text for the image that will appear if the image cannot be displayed"></p>
+<p>An inline image link with a tooltip:</p>
+<p><img src="https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Alternate text for the image" title="Hover over the image for a tooltip."></p>
+<p>A reference image link with a tooltip:</p>
+<p><img src="https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Alternate text for the image" title="Hover over the reference image for a tooltip."></p>
+<p>To create an image that is also a link, wrap the normal image syntax in square brackets and follow it with the source link in parentheses.</p>
+<p><a href="https://www.google.com/" title="This image is a link that will take you to www.google.com."><img src="https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Alternate text for the image"></a></p>
+<br>
+<pre class="hljs"><code><div>To insert an image in your document, use the same syntax as for links, but precede it with an exclamation point.
+
+An inline image link:
+
+![<span class="hljs-string">Alternate text for the image that will appear if the image cannot be displayed</span>](<span class="hljs-link">https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</span>)
+
+An inline image link with a tooltip:
+
+![<span class="hljs-string">Alternate text for the image</span>](<span class="hljs-link">https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png "Hover over the image for a tooltip."</span>)
+
+A reference image link with a tooltip:
+
+![<span class="hljs-string">Alternate text for the image</span>][<span class="hljs-symbol">Just as with regular reference links, this reference defines both the image source and the tooltip text</span>]
+
+[<span class="hljs-symbol">Just as with regular reference links, this reference defines both the image source and the tooltip text</span>]: <span class="hljs-link">https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png "Hover over the reference image for a tooltip."</span>
+
+To create an image that is also a link, wrap the normal image syntax in square brackets and follow it with the source link in parentheses.
+
+[<span class="hljs-string">![Alternate text for the image</span>](<span class="hljs-link">https://www.google.ca/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</span>)](<span class="hljs-link">https://www.google.com/ "This image is a link that will take you to www.google.com."</span>)
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Videos
+=======================================================================================-->
+<p><a id="section_videos"/></a></p>
+<h2 id="videos">Videos</h2>
+<p>Although you cannot embed an online video in a Markdown document, you can easily insert an image of its thumbnail and make it a link to the video.</p>
+<p><a href="https://www.youtube.com/watch?v=pTCROLZLhDM"><img src="https://img.youtube.com/vi/pTCROLZLhDM/maxresdefault.jpg" alt="Alternate text for the image"></a></p>
+<br>
+<pre class="hljs"><code><div>Although you cannot embed an online video in a Markdown document, you can easily insert an image of its thumbnail and make it a link to the video.
+
+[<span class="hljs-string">![Alternate text for the image</span>](<span class="hljs-link">https://img.youtube.com/vi/pTCROLZLhDM/maxresdefault.jpg</span>)](<span class="hljs-link">https://www.youtube.com/watch?v=pTCROLZLhDM</span>)
+</div></code></pre>
+<!--======================================================================================
+    Reference Links
+=======================================================================================-->
+<!--======================================================================================
+   CSS
+=======================================================================================-->
+<link href="../CSS/dark.css" rel="stylesheet"></link>
+</body>
+</html>

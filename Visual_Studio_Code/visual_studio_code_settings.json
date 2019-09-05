@@ -1,0 +1,48 @@
+/*========================================================================================
+    settings.json
+	
+    Global settings for VSCode.
+	
+    Copyright 2019 Erick Fernandez de Arteaga. All rights reserved.
+        https://github.com/erick-fda
+        https://www.linkedin.com/in/erick-fda
+	
+========================================================================================*/
+
+{
+    /* C# */
+    "[cs]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+
+    /* C++ */
+    "[cpp]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+
+    /* CSS */
+    "[css]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+
+    /* Editor */
+    "editor.detectIndentation": false,
+    "editor.rulers": [90],
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+
+    /* Files */
+    "files.hotExit": "off",
+
+    /* Markdown */
+    "[markdown]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 3
+    },
+
+    /* Window */
+    "window.zoomLevel": 0
+}

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>coding_style_conventions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<!--======================================================================================
+    Coding Style Convetions
+=======================================================================================-->
+<h1 id="coding-style-convetions">Coding Style Convetions</h1>
+<p><em>Copyright 2019 Erick Fernandez de Arteaga. All rights reserved.</em></p>
+<ul>
+<li>
+<p><a href="https://github.com/erick-fda" title="Erick's GitHub Profile">Erick's GitHub Profile</a></p>
+</li>
+<li>
+<p><a href="https://www.linkedin.com/in/erick-fda" title="Erick's LinkedIn Profile">Erick's LinkedIn Profile</a></p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Table of Contents
+=======================================================================================-->
+<h2 id="table-of-contents">Table of Contents</h2>
+<br>
+<ol>
+<li>
+<p><strong><a href="#section_naming_conventions">Naming Conventions</a></strong></p>
+<ol>
+<li><a href="#section_folders">Folders</a></li>
+<li><a href="#section_files">Files</a></li>
+<li><a href="#section_namespaces">Namespaces</a></li>
+<li><a href="#section_classes">Classes</a></li>
+<li><a href="#section_structs">Structs</a></li>
+<li><a href="#section_enums">Enumerated Types</a></li>
+<li><a href="#section_constants">Constants</a></li>
+<li><a href="#section_fields">Instance and Class Fields</a></li>
+<li><a href="#section_properties">Instance and Class Properties</a></li>
+<li><a href="#section_functions">Functions</a></li>
+<li><a href="#section_parameters">Parameters</a></li>
+<li><a href="#section_local_variables">Local Variables</a></li>
+</ol>
+</li>
+<li>
+<p><strong><a href="#section_layout_conventions">Layout Conventions</a></strong></p>
+<ol>
+<li><a href="#section_code_file_layout">Code File Layout</a></li>
+<li><a href="#section_line_length">Line Length</a></li>
+<li><a href="#section_tabs">Tabs</a></li>
+<li><a href="#section_braces">Braces</a></li>
+<li><a href="#section_whitespace">Whitespace</a></li>
+<li><a href="#section_line_breaks">Line Breaks</a></li>
+<li><a href="#section_parentheses">Parentheses</a></li>
+</ol>
+</li>
+<li>
+<p><strong><a href="#section_commenting_conventions">Commenting Conventions</a></strong></p>
+<ol>
+<li><a href="#section_inline_comments">Inline Comments</a></li>
+<li><a href="#section_block_comments">Block Comments</a></li>
+<li><a href="#section_file_headers">File Headers</a></li>
+<li><a href="#section_class_headers">Class Headers</a></li>
+<li><a href="#section_function_headers">Function Headers</a></li>
+<li><a href="#section_section_headers">Section Headers</a></li>
+<li><a href="#section_field_comments">Field Comments</a></li>
+</ol>
+</li>
+</ol>
+<br>
+<!--======================================================================================
+    Naming Conventions
+=======================================================================================-->
+<p><a id="section_naming_conventions"></a></p>
+<h2 id="naming-conventions">Naming Conventions</h2>
+<p>A huge part of code readability derives from choosing proper names for classes, variables, functions, and other program building blocks.</p>
+<p>Specific advice for each construct follows, but here are some good guidelines for naming in general:</p>
+<ul>
+<li>
+<p><strong>Always choose specific names!</strong></p>
+<ul>
+<li>
+<p>A variable named <code>x</code> or <code>temp</code> tells us nothing about its purpose and makes for difficult-to-read code. <code>xDistance</code> and <code>swap</code> are some examples of much better names that could be used.</p>
+</li>
+<li>
+<p>Someone who has little knowledge of the program should be able to get some idea of what a variable or function's purpose is based on the name.</p>
+</li>
+<li>
+<p>The exception to this rule is using <code>i</code>, <code>j</code>, and <code>k</code> as loop counter variable names; <code>it</code> for an iterator; or other similar conventions.</p>
+<ul>
+<li>
+<p>This is acceptable because it is a common convention, and thus naming a variable <code>i</code> <em>does</em> tell us about its purpose: it tells us that it is a loop counter.</p>
+</li>
+<li>
+<p>However, when the loop variable represents anything other than a mere counter or index (such as the loop variable in a <code>foreach</code> loop), a more descriptive name is recommended.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Don't go too short or too long!</strong></p>
+<ul>
+<li>
+<p>When naming variables, methods, etc., a name that's too short will be ambiguous, but a name that's too long will be a jumbled mess that's difficult to remember.</p>
+</li>
+<li>
+<p>In general, aim to make your variable names as concise as possible while keeping their purpose clear.</p>
+</li>
+<li>
+<p>Remember that variable names do not exist in a vacuum. The context that a variable is in, such as a particular function, class, or method, tells us about it.</p>
+<ul>
+<li>
+<p>The function <code>Serve()</code>, for example, will mean something very different in a <code>Waiter</code> class than it would in a <code>TennisPlayer</code> class.</p>
+</li>
+<li>
+<p>However, the function name does not need to be any longer in either class to differentiate it, since the classes themselves provide the context that makes the difference clear.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Use appropriate parts of language for names!</strong></p>
+<ul>
+<li>
+<p>In general, classes and variables <em>are</em> things, while functions <em>do</em> things. Accordingly, use noun phrases for variable and class names and verb phrases for function names most of the time.</p>
+<ul>
+<li>An acceptable exception is naming public getters for private variables with nouns that reflect the variable. For example, making <code>Size()</code> the getter method for the <code>_size</code> field.
+<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!--======================================================================================
+    Folders
+=======================================================================================-->
+<p><a id="section_folders"></a></p>
+<h3 id="folders">Folders</h3>
+<p>Use <code>PascalCase</code> for naming folders.</p>
+<ul>
+<li>
+<p>Use only alphanumeric and underscore characters.</p>
+</li>
+<li>
+<p>When numbering folders, left-pad with zeroes to the maximum number of digits you expect to use in numbering (e.g., favor <code>Folder01</code> over <code>Folder1</code> if you expect to have 10 or more such folders).</p>
+<ul>
+<li>This will ensure your folders sort into numerical order when sorting alphabetically.</li>
+</ul>
+</li>
+<li>
+<p>Optionally, prepend an underscore to important folders to make them appear at the top of an alphabetical sorting (e.g., <code>_AnImportantFolder</code>).</p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Files
+=======================================================================================-->
+<p><a id="section_files"></a></p>
+<h3 id="files">Files</h3>
+<p>Use <code>PascalCase.extension</code> for naming class files.</p>
+<p>Use <code>snake_case.extension</code> for naming other files.</p>
+<ul>
+<li>
+<p>Use only alphanumeric and underscore characters.</p>
+</li>
+<li>
+<p>When numbering files, left-pad with zeroes to the maximum number of digits you expect to use in numbering (e.g., favor <code>file_01.txt</code> over <code>file_1.txt</code> if you expect to have 10 or more such files).</p>
+</li>
+<li>
+<p>Preferably, make use of a naming convetion such as <code>type_subtype_id.extension</code> (e.g., <code>img_button_ok.png</code>).</p>
+<ul>
+<li>A naming convention such as the above will keep closely related files sorted together when you sort them alphabetically in a file viewer.</li>
+</ul>
+</li>
+<li>
+<p>Optionally, prepend an underscore to important files to make them appear at the top of an alphabetical sorting (e.g., <code>_an_important_file.txt</code>).</p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Namespaces
+=======================================================================================-->
+<p><a id="section_namespaces"></a></p>
+<h3 id="namespaces">Namespaces</h3>
+<p>Use <code>PascalCase</code> for naming namespaces.</p>
+<br>
+<!--======================================================================================
+    Classes
+=======================================================================================-->
+<p><a id="section_classes"></a></p>
+<h3 id="classes">Classes</h3>
+<p>Use <code>PascalCase</code> and singular noun phrase names for naming classes.</p>
+<ul>
+<li>
+<p>Filenames for class files should match the class name.</p>
+</li>
+<li>
+<p>Prepend an <code>I</code> to interface names (e.g., <code>IEnumerator</code>).</p>
+</li>
+<li>
+<p>Aside from the above point, interfaces and extensions should generally follow the same conventions as classes.</p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Structs
+=======================================================================================-->
+<p><a id="section_structs"></a></p>
+<h3 id="structs">Structs</h3>
+<p>Use <code>PascalCase</code> and singular noun phrase names for naming structs.</p>
+<ul>
+<li>In general, structs should be treated as classes for the purposes of naming, formatting, and commenting. Struct fields, methods, etc. should also follow the same naming conventions as their class counterparts.</li>
+</ul>
+<br>
+<!--======================================================================================
+    Enumerated Types
+=======================================================================================-->
+<p><a id="section_enums"></a></p>
+<h3 id="enumerated-types">Enumerated Types</h3>
+<p>Use <code>PascalCase</code> and singular noun phrase names for naming both enum types and values.</p>
+<br>
+<!--======================================================================================
+    Constants
+=======================================================================================-->
+<p><a id="section_constants"></a></p>
+<h3 id="constants">Constants</h3>
+<p>Use <code>ALL_CAPS_SNAKE_CASE</code> and noun phrase names (usually singular) for naming constant values.</p>
+<br>
+<!--======================================================================================
+    Fields
+=======================================================================================-->
+<p><a id="section_fields"></a></p>
+<h3 id="instance-and-class-fields">Instance and Class Fields</h3>
+<p>Use <code>_camelCaseWithUnderscore</code> and noun phrase names for naming private fields (except for booleans, which should use verb phrase names like <code>_isActive</code> or <code>_wasClicked</code>).</p>
+<p>In the case of booleans, names should <em>always</em> be phrased in the positive. In other words, opt for a name like <code>_isSelected</code> rather than <code>_isNotSelected</code>. The following example illustrates why:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (_isSelected) ...
+<span class="hljs-comment">/*
+   Good. Easy-to-read.
+*/</span>
+
+<span class="hljs-keyword">if</span> (_isNotSelected) ...
+<span class="hljs-comment">/*
+   A little unintuitive.
+*/</span>
+
+<span class="hljs-keyword">if</span> (!_isNotSelected) ...
+<span class="hljs-comment">/*
+   Okay, this is getting bad.
+*/</span>
+
+<span class="hljs-keyword">if</span> (!_isNotSelected == <span class="hljs-literal">false</span>) ...
+<span class="hljs-comment">/*
+   Please stop.
+*/</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Properties
+=======================================================================================-->
+<p><a id="section_properties"></a></p>
+<h3 id="instance-and-class-properties">Instance and Class Properties</h3>
+<p>Use <code>PascalCase</code> and noun phrase names for naming properties (except for booleans, which should use verb phrase names like <code>isActive</code>).</p>
+<p>In the case of booleans, names should <em>always</em> be in the positive, <em>never</em> in the negative. In other words, opt for a name like <code>IsSelected</code> rather than <code>IsNotSelected</code>. The following example illustrates why:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*
+   Good. Easy-to-read.
+*/</span>
+<span class="hljs-keyword">if</span> (IsSelected) ...
+
+<span class="hljs-comment">/*
+   A little unintuitive.
+*/</span>
+<span class="hljs-keyword">if</span> (IsNotSelected) ...
+
+<span class="hljs-comment">/*
+   Okay, this is getting bad.
+*/</span>
+<span class="hljs-keyword">if</span> (!IsNotSelected) ...
+
+<span class="hljs-comment">/*
+   Please stop.
+*/</span>
+<span class="hljs-keyword">if</span> (!IsNotSelected == <span class="hljs-literal">false</span>) ...
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Functions
+=======================================================================================-->
+<p><a id="section_functions"></a></p>
+<h3 id="functions">Functions</h3>
+<p>Use <code>PascalCase()</code> and verb phrase names for naming functions.</p>
+<br>
+<!--======================================================================================
+    Parameters
+=======================================================================================-->
+<p><a id="section_parameters"></a></p>
+<h3 id="parameters">Parameters</h3>
+<p>Use <code>camelCase</code> and noun phrase names for naming function parameters (except for booleans, which should use verb phrase names like <code>isActive</code>).</p>
+<br>
+<!--======================================================================================
+    Local Variables
+=======================================================================================-->
+<p><a id="section_local_variables"></a></p>
+<h3 id="local-variables">Local Variables</h3>
+<p>Use <code>camelCase</code> and noun phrase names for naming local variables (except for booleans, which should use verb phrase names like <code>isActive</code>).</p>
+<br>
+<!--======================================================================================
+    Layout Conventions
+=======================================================================================-->
+<p><a id="section_layout_conventions"></a></p>
+<h2 id="layout-convetions">Layout Convetions</h2>
+<p>Unlike with naming conventions, there is often little or no reason to pick a particular layout convention over another. However, there is plenty of reason to pick <em>one</em> and stick to it. The consistency afforded by layout conventions will complement proper naming conventions and, in practice, lead to greater code readability and maintainability.</p>
+<br>
+<!--======================================================================================
+    Code File Layout
+=======================================================================================-->
+<p><a id="section_code_file_layout"></a></p>
+<h3 id="code-file-layout">Code File Layout</h3>
+<p>Content within files should generally be ordered as follows, using the <a href="http://stylecop.soyuz5.com/StyleCop%20Rules.html" title="StyleCop Rules Documentation">StyleCop Rules</a> as a guide:</p>
+<ol>
+<li>
+<p>Dependencies (i.e., <code>import</code>, <code>using</code>, etc. statements)</p>
+</li>
+<li>
+<p>Class definition</p>
+<ol>
+<li>Enums</li>
+<li>Constants</li>
+<li>Fields</li>
+<li>Properties (Or Accessors/Mutators, Getters/Setters, etc. depending on the language)</li>
+<li>Constructors</li>
+<li>Destructors</li>
+<li>Interface Methods</li>
+<li>Methods</li>
+<li>Structs</li>
+<li>Classes</li>
+</ol>
+</li>
+</ol>
+<p>Each of these groups should be further sorted by access level:</p>
+<ol>
+<li>Public</li>
+<li>Internal</li>
+<li>Protected Internal</li>
+<li>Protected</li>
+<li>Private</li>
+</ol>
+<p>Each of the access groups should be further sorted by class (<code>static</code>) or instance members:</p>
+<ol>
+<li>Class Members</li>
+<li>Instance Members</li>
+</ol>
+<p>Each of the class/instance groups should be further sorted by <code>readonly</code> or not:</p>
+<ol>
+<li>Readonly</li>
+<li>Non-Readonly</li>
+</ol>
+<br>
+<!--======================================================================================
+    Line Length
+=======================================================================================-->
+<p><a id="section_line_length"></a></p>
+<h3 id="line-length">Line Length</h3>
+<p>Line length should be limited to about 90 characters (not counting initial tabs or spaces).</p>
+<ul>
+<li>
+<p>Lines of code longer than this amount can easily become difficult to read and debug.</p>
+</li>
+<li>
+<p>However, use sensible judgement and allow for exceeding this limit when adhering to it would worsen readability.</p>
+<ul>
+<li>For example, do not split just the last few characters of a line onto a new line. Only split the line if it would otherwise significantly exceed the 90-character limit.</li>
+</ul>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Tabs
+=======================================================================================-->
+<p><a id="section_tabs"></a></p>
+<h3 id="tabs">Tabs</h3>
+<p>Use four space characters instead of tab characters.</p>
+<ul>
+<li>Most modern IDEs will have a setting to automatically replace tabs with a certain number of spaces.</li>
+</ul>
+<p>Use tabs to indent lines contained by braces. Indent again for each subsequent level of nesting.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Outside braces, no indent. */</span>
+
+MyClass
+{
+   <span class="hljs-comment">/* Inside one pair of braces, indented once. */</span>
+
+   MyFunction()
+   {
+      <span class="hljs-comment">/* Inside another pair of braces, indented twice. */</span>
+   }
+
+   <span class="hljs-comment">/* Back to a single level of indentation. */</span>
+} 
+</div></code></pre>
+<br>
+<p>Also indent when splitting a long line of code.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* You can keep the closing parenthesis at the end of the argument list...*/</span>
+thisIsAReallyLongFunctionCallThatIWillSplit(
+   thisIsAnArgument);
+
+<span class="hljs-comment">/* ...or you can keep it on its own un-indented line, treating it much like a brace.*/</span>
+thisIsAReallyLongFunctionCallThatIWillSplit(
+   thisIsAnArgument
+);
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Braces
+=======================================================================================-->
+<p><a id="section_braces"></a></p>
+<h3 id="braces">Braces</h3>
+<p>Use <strong>Allman style</strong> brace alignment in most cases. (Sorry, Steve McConnell!)</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Allman style keeps opening and closing braces vertically aligned. */</span>
+
+MyClass
+{
+    <span class="hljs-comment">/* Code inside braces is indented. */</span>
+}
+</div></code></pre>
+<p>The exception is when declaring a single class within a namespace in a class file. In such cases, the recommended convention is as follows:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyNamespace</span> { <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> : <span class="hljs-title">public</span> <span class="hljs-title">MyBaseClass</span>
+{
+   <span class="hljs-comment">/* Class code goes here. */</span>
+}}
+</div></code></pre>
+<p>This admittedly irregular (but very readable) alignment helps to avoid needing to indent all of your class code twice.</p>
+<br>
+<!--======================================================================================
+    Whitespace
+=======================================================================================-->
+<p><a id="section_whitespace"></a></p>
+<h3 id="whitespace">Whitespace</h3>
+<p>Sometimes including additional whitespace between text can improve code readability, and in these cases, you should do so. This can especially be the case when you have several layers of nested parentheses.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*
+   This line is hard to read.
+   Try figuring out how many parameters MyBooleanCheck() takes and you'll see why.
+*/</span>
+<span class="hljs-keyword">if</span>(MyBooleanCheck(GetInput(myVar1,myVar2),GetMoreInput(myVar3,myVar4)))
+
+<span class="hljs-comment">/*
+   Try it again with some helpful whitespace provided. Much easier!
+*/</span>
+<span class="hljs-keyword">if</span> (MyBooleanCheck( GetInput(myVar1,myVar2), GetMoreInput(myVar3,myVar4) ))
+
+<span class="hljs-comment">/*
+    Using line breaks together with the extra whitespace can aid readability even more.
+*/</span>
+<span class="hljs-keyword">if</span>(
+    MyBooleanCheck(
+        GetInput(myVar1,myVar2), 
+        GetMoreInput(myVar3,myVar4)))
+</div></code></pre>
+<p>Annoyingly, some IDEs will automatically remove extra spaces within function calls when you type the closing parenthesis. Worse, this auto-correction setting is often tied up with other auto-corrections that you <em>do</em> want, so turning it off can be undesirable. It's up to you to make a call as to whether you'll bother with extra spaces in such cases.</p>
+<br>
+<!--======================================================================================
+    Line Breaks
+=======================================================================================-->
+<p><a id="section_line_breaks"></a></p>
+<h3 id="line-breaks">Line Breaks</h3>
+<p>It's a good practice to break up code into &quot;paragraphs&quot; of related functionality using blank lines.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Even without reading the code in detail, it's clear that the first three lines are related in some way that the fourth isn't. */</span>
+
+myVar = GetAValue();
+myVar = DoSomething(myVar);
+Debug.Log = (myVar);
+
+anotherVar = DoSomethingUnrelated();
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Parentheses
+=======================================================================================-->
+<p><a id="section_parentheses"></a></p>
+<h3 id="parentheses">Parentheses</h3>
+<p>Use as many parentheses as necessary for readability, even if they are not necessary to achieve correct order of execution.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* This line is hard to read. What's the value of theResult? */</span>
+theResult = <span class="hljs-number">1</span>+<span class="hljs-number">2</span>*<span class="hljs-number">3</span>+<span class="hljs-number">6</span>/<span class="hljs-number">2</span>+<span class="hljs-number">7</span><span class="hljs-number">-9</span>;
+
+<span class="hljs-comment">/* Using parentheses avoids the risk that your reader will forget the order of operations and improves readability. */</span>
+theResult = <span class="hljs-number">1</span>+(<span class="hljs-number">2</span>*<span class="hljs-number">3</span>)+(<span class="hljs-number">6</span>/<span class="hljs-number">2</span>)+<span class="hljs-number">7</span><span class="hljs-number">-9</span>;
+
+<span class="hljs-comment">/* Combine the use of parentheses and whitespace for the most readable result! */</span>
+theResult = <span class="hljs-number">1</span> + (<span class="hljs-number">2</span>*<span class="hljs-number">3</span>) + (<span class="hljs-number">6</span>/<span class="hljs-number">2</span>) + <span class="hljs-number">7</span> - <span class="hljs-number">9</span>;
+</div></code></pre>
+<p>This particular example is unrealistic since it uses only constant integer values, but the parentheses and whitespace would be just as helpful if the integers were replaced with variables and method calls.</p>
+<br>
+<!--======================================================================================
+    Commenting Conventions
+=======================================================================================-->
+<p><a id="section_commenting_conventions"></a></p>
+<h2 id="commenting-conventions">Commenting Conventions</h2>
+<p>The conventions listed in this section describe where in files certain types of comments should appear and how they should be formatted.</p>
+<br>
+<!--======================================================================================
+    Inline Comments
+=======================================================================================-->
+<p><a id="section_inline_comments"></a></p>
+<h3 id="inline-comments">Inline Comments</h3>
+<p>All comments should be multi-line comments (if the language you're using supports them), even if they only occupy one line. This affords visual consistency for all inline comments.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* That means that for most languages, your comments should look like this... */</span>
+
+<span class="hljs-comment">// ...not like this.</span>
+</div></code></pre>
+<p>Any comment that exists on a line of its own should be never be immediately preceded by a line of code. This avoids having code lines and comment lines intermixed.</p>
+<pre class="hljs"><code><div>DoSomething();
+<span class="hljs-comment">/* This is comment blasphemy! */</span>
+DoSomethingElse();
+
+<span class="hljs-comment">/* This is how to properly use a comment. */</span>
+DoYetAnotherThing();
+
+A(); <span class="hljs-comment">/* This is fine, though. */</span>
+B(); <span class="hljs-comment">/* These comments exist on the same lines as code. */</span>
+C(); <span class="hljs-comment">/* Therefore you do not need blank lines in front of them. */</span>
+</div></code></pre>
+<br>
+<ul>
+<li>
+<p><strong>DO NOT restate in inline comments anything that can be deduced from the code itself!</strong></p>
+<ul>
+<li>Comments that provide the same information as the code they document only bloat code and add more lines to sift through when looking for a particular section.</li>
+</ul>
+</li>
+<li>
+<p><strong>DO use inline comments to clarify your intent!</strong></p>
+<ul>
+<li>
+<p>In other words, don't use inline comments to say what your code is doing, but rather <em>why</em>.</p>
+</li>
+<li>
+<p>For example, rather than writing a comment like <code>/* Print out the numbers from 1 to 30. */</code>, write <code>/* Print the line numbers for the user document. */</code>. The former could be deduced by reading the code itself; the latter could only be known by the original programmer (at least without additional context) and is useful to someone reading the code later, and thus makes for a good comment.</p>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Block Comments
+=======================================================================================-->
+<p><a id="section_block_comments"></a></p>
+<h3 id="block-comments">Block Comments</h3>
+<p>Block comments are similar to multi-line comments, with the main formatting difference being that the opening and ending slashes appear on their own lines, rather than inline with the comment content.</p>
+<p>These comments are generally used at the top of class and function definitions to summarize the purpose of those structures.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*
+    This is how a block comment looks.
+*/</span>
+</div></code></pre>
+<br>
+<ul>
+<li>
+<p><strong>DO use block comments to summarize the purpose of a class or function!</strong></p>
+<ul>
+<li>
+<p>Unlike inline comments, you have a bit more liberty to describe <em>what</em> your code does with these as long as you're concise.</p>
+<ul>
+<li>In other words, it's fine to use a 10-line comment to summarize what 100-200 lines of code do, but don't use 10 lines in a comment to describe 10 lines of code.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    File Headers
+=======================================================================================-->
+<p><a id="section_file_headers"></a></p>
+<h3 id="file-headers">File Headers</h3>
+<p>File headers should be formatted as follows and appear at the top of each file.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*========================================================================================
+    &lt;&lt;Filename&gt;&gt;
+
+    &lt;&lt;Summary of contents of file.&gt;&gt;
+    
+    Copyright &lt;&lt;Year&gt;&gt; &lt;&lt;Author name(s)&gt;&gt;. All rights reserved.
+        &lt;&lt;Author email or website 1&gt;&gt;
+        &lt;&lt;Author email or website 2&gt;&gt;
+        &lt;&lt;etc.&gt;&gt;
+    
+========================================================================================*/</span>
+</div></code></pre>
+<ul>
+<li>
+<p>If there are multiple authors for a single file, each adjacent pair of names should be separated using a comma and a space.</p>
+</li>
+<li>
+<p>In non-code files, such as text files, you can drop the opening and closing <code>/* */</code> slashes and use only <code>=</code> equals signs in the top and bottom lines.</p>
+</li>
+<li>
+<p>In files that contain only one top-level class (i.e., not counting internal classes), you can replace the name and summary of the file with the name and summary of the class instead instead of having separate file and class headers.</p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Section Headers
+=======================================================================================-->
+<p><a id="section_section_headers"></a></p>
+<h3 id="section-headers">Section Headers</h3>
+<p>Section headers should be formatted as follows and appear at the beginning of major &quot;sections&quot; of a file:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*========================================================================================
+	&lt;&lt;Section Name&gt;&gt;
+========================================================================================*/</span>
+</div></code></pre>
+<p>It is up to you to decide what is a significant enough section of a file to merit a header.</p>
+<p>You can use a similar format, but with hyphens instead of equals signs for sub-section headers within a section. Again, it is up to you to decide what parts of a file are worth splitting up like this.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*----------------------------------------------------------------------------------------
+	&lt;&lt;Sub-section Name&gt;&gt;
+----------------------------------------------------------------------------------------*/</span>
+</div></code></pre>
+<p>A suggested convention is to use major section headings for sections outside of class definitions (to group related classes in a file, for example) and sub-section headings for sections within class definitions (to group fields, properties, and methods separately, for example).</p>
+<br>
+<!--======================================================================================
+    Class Headers
+=======================================================================================-->
+<p><a id="section_class_headers"></a></p>
+<h3 id="class-headers">Class Headers</h3>
+<p>Class headers should be formatted as follows and appear at the top of each class definition. This type of header should also be used for enumerated types, structs, interfaces, and extensions.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*
+    &lt;&lt;ClassName&gt;&gt;
+
+    &lt;&lt;Summary of class functionality.&gt;&gt;
+*/</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    Function Headers
+=======================================================================================-->
+<p><a id="section_function_headers"></a></p>
+<h3 id="function-headers">Function Headers</h3>
+<p>Function headers should be formatted as follows and appear at the top of each function definition.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/*
+    &lt;&lt;Concise summary of what the function does.&gt;&gt;
+
+    @returns &lt;&lt;What the function returns.&gt;&gt;
+
+    @param &lt;&lt;parameterName1&gt;&gt; - &lt;&lt;What parameterName1 is.&gt;&gt;
+    @param &lt;&lt;parameterName2&gt;&gt; - &lt;&lt;What parameterName2 is.&gt;&gt;
+
+    @throws &lt;&lt;exceptionName1&gt;&gt; - &lt;&lt;Under what conditions exceptionName1 is thrown.&gt;&gt;
+    @throws &lt;&lt;exceptionName2&gt;&gt; - &lt;&lt;Under what conditions exceptionName2 is thrown.&gt;&gt;
+*/</span>
+</div></code></pre>
+<ul>
+<li>
+<p>The <code>@returns</code> tag should only be used when the function has a return value.</p>
+</li>
+<li>
+<p>The <code>@param</code> tag should only be used if the function takes parameters.</p>
+</li>
+<li>
+<p>You can use a single <code>@param</code> to document multiple related parameters, such as <code>x</code>, <code>y</code>, and <code>z</code> parameters describing a point in 3D space. In such a case, separate each adjacent pair of parameter names with a comma and a space.</p>
+</li>
+<li>
+<p>The <code>@throws</code> tag should only be used if the function can throw any exceptions.</p>
+</li>
+<li>
+<p>Unlike with the <code>@param</code> tag, multiple exceptions cannot be documented by a single <code>@throws</code> tag (since their descriptions will differ). Each exception should be documented by a separate <code>@throws</code> tag.</p>
+</li>
+</ul>
+<br>
+<!--======================================================================================
+    Field Comments
+=======================================================================================-->
+<p><a id="section_field_comments"></a></p>
+<h3 id="field-comments">Field Comments</h3>
+<p>An inline comment that documents a field, property, or local variable should look like this:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> myVar;  <span class="hljs-comment">/* A variable. */</span>
+</div></code></pre>
+<br>
+<!--======================================================================================
+    References
+=======================================================================================-->
+<p><a id="section_references"></a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>McConnell, S. (2004). Code Complete. Redmond, Washington: Microsoft Press.</p>
+</li>
+<li>
+<p>Reeves, A. (2011). StyleCop. Retrieved from http://stylecop.soyuz5.com</p>
+</li>
+</ul>
+<!--======================================================================================
+    Reference Links
+=======================================================================================-->
+<!--======================================================================================
+   CSS
+=======================================================================================-->
+<link href="./CSS/dark.css" rel="stylesheet"></link>
+</body>
+</html>
