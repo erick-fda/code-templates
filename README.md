@@ -44,6 +44,7 @@ Currently, this project contains material for the following languages and tools:
    - C++
    - CSS
    - Markdown
+   - Python
    - Visual Studio Code
 
 

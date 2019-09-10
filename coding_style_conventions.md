@@ -183,7 +183,7 @@ Use `PascalCase` and singular noun phrase names for naming structs.
 ### Enumerated Types
 
 
-Use `PascalCase` and singular noun phrase names for naming both enum types and values.
+Use `ALL_CAPS_SNAKE_CASE` and singular noun phrase names for naming both enum types and values.
 
 <br>
 
